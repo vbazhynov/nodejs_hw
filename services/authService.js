@@ -6,7 +6,11 @@ class AuthService {
     if (!user) {
       throw Error("User not found");
     }
-    return user;
+    if (user.password === userData.password) {
+      return user;
+    } else {
+      throw Error("Password Incorrect");
+    }
   }
 }
 

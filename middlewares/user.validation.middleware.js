@@ -24,7 +24,7 @@ const baseUserValid = (req, res, next) => {
   if (req.body.hasOwnProperty("id")) {
     errorMessage.message = `Field "id" is not required in request, please delete it`;
     res.status(400).send(errorMessage);
-  } else if (req.body.password.length < 3) {
+  } else if (req.body.password && req.body.password.length < 3) {
     errorMessage.message = "Password should be longer than 3 symbols";
     res.status(400).send(errorMessage);
   } else if (req.body.email && !req.body.email.endsWith("@gmail.com")) {
@@ -35,7 +35,8 @@ const baseUserValid = (req, res, next) => {
     (!req.body.phoneNumber.startsWith("+380") ||
       req.body.phoneNumber.length !== 13)
   ) {
-    errorMessage.message = 'Phone number format should be "+380ххххххххх" ';
+    errorMessage.message =
+      'Phone number format should be in "+380ххххххххх" format';
     res.status(400).send(errorMessage);
   } else {
     next();

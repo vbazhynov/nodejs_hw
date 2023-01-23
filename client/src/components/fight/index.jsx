@@ -55,12 +55,12 @@ class Fight extends React.Component {
       hitPower1 = this.getDamage(fighter1, fighter2).toFixed(1);
       logObj.fighter1Shot = Number(hitPower1);
       health2 -= hitPower1;
-      logObj.fighter2Health = health2.toFixed(1);
+      logObj.fighter2Health = health2;
 
       hitPower2 = this.getDamage(fighter2, fighter1).toFixed(1);
       logObj.fighter2Shot = Number(hitPower2);
       health1 -= hitPower2;
-      logObj.fighter1Health = health1.toFixed(1);
+      logObj.fighter1Health = health1;
 
       log.push(logObj);
 

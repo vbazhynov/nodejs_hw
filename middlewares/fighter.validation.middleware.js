@@ -26,8 +26,16 @@ const baseFighterValid = (req, res, next) => {
     res.status(400).send(errorMessage);
     return;
   }
-
-  if (req.body.power < 1 || req.body.power > 100) {
+  if (req.body.power && typeof req.body.power !== "number") {
+    errorMessage.message = "Power parameter should be a number type";
+    res.status(400).send(errorMessage);
+  } else if (req.body.health && typeof req.body.health !== "number") {
+    errorMessage.message = "Health parameter should be a number type";
+    res.status(400).send(errorMessage);
+  } else if (req.body.defense && typeof req.body.defense !== "number") {
+    errorMessage.message = "Defense parameter should be a number type";
+    res.status(400).send(errorMessage);
+  } else if (req.body.power < 1 || req.body.power > 100) {
     errorMessage.message = "Power parameter should be between 1 and 100";
     res.status(400).send(errorMessage);
   } else if (req.body.defense < 1 || req.body.defense > 10) {

@@ -49,11 +49,12 @@ class FighterService {
   }
 
   changeFighterData(req) {
-    const user = fighterRepository.update(req.params.id, req.body);
-    if (!user) {
+    const fighterExist = fighterRepository.getOne({ id: req.params.id });
+    if (!fighterExist) {
       throw Error("There is no such User in database");
     } else {
-      return user;
+      const fighter = fighterRepository.update(req.params.id, req.body);
+      return fighter;
     }
   }
 }

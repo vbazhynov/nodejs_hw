@@ -48,10 +48,11 @@ class UserService {
   }
 
   changeUserData(req) {
-    const user = userRepository.update(req.params.id, req.body);
-    if (!user) {
+    const userExist = userRepository.getOne({ id: req.params.id });
+    if (!userExist) {
       throw Error("There is no such User in database");
     } else {
+      const user = userRepository.update(req.params.id, req.body);
       return user;
     }
   }

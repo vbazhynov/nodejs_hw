@@ -1,6 +1,6 @@
 import { fightRepository } from "../repositories/fightRepository.js";
 
-class FightersService {
+class FightService {
   // OPTIONAL TODO: Implement methods to work with fights
 
   addFight(req, res) {
@@ -25,7 +25,7 @@ class FightersService {
     }
   }
 
-  deleteFightById(req) {
+  deleteFightrById(req) {
     const fight = fightRepository.delete(req.params.id);
     if (!fight) {
       throw Error("There is no such fight in database");
@@ -35,6 +35,6 @@ class FightersService {
   }
 }
 
-const fightersService = new FightersService();
+const fightService = new FightService();
 
-export { fightersService };
+export { fightService };

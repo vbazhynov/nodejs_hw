@@ -49,33 +49,28 @@ class Fight extends React.Component {
     let hitPower1 = 0;
     let hitPower2 = 0;
 
-    while (health1 > 0 || health2 > 0) {
+    do {
+      const logObj = new Object();
+
       hitPower1 = this.getDamage(fighter1, fighter2).toFixed(1);
+      logObj.fighter1Shot = Number(hitPower1);
       health2 -= hitPower1;
-      log.push(
-        `Fighter1 hit ${hitPower1} health of fighter ${
-          fighter2.name
-        } is ${health2.toFixed(1)}`
-      );
-      if (health2 <= 0) {
-        health2 = 0;
-        alert(`Fighter ${fighter1.name} wins.`);
-        break;
-      }
+      logObj.fighter2Health = health2.toFixed(1);
 
       hitPower2 = this.getDamage(fighter2, fighter1).toFixed(1);
+      logObj.fighter2Shot = Number(hitPower2);
       health1 -= hitPower2;
-      log.push(
-        `Fighter2 hit ${hitPower1}, health of fighter ${
-          fighter1.name
-        } is ${health1.toFixed(1)}`
-      );
-      if (health1 <= 0) {
-        health1 = 0;
-        alert(`Fighter ${fighter2.name} wins.`);
-        break;
+      logObj.fighter1Health = health1.toFixed(1);
+
+      log.push(logObj);
+
+      if (health2 <= 0) {
+        alert(`Fighter ${fighter1.name} wins.`);
       }
-    }
+      if (health1 <= 0) {
+        alert(`Fighter ${fighter2.name} wins.`);
+      }
+    } while (health1 > 0 && health2 > 0);
 
     const data = await createFight({
       fighter1: fighter1.id,
@@ -83,7 +78,7 @@ class Fight extends React.Component {
       log,
     });
     if (data && !data.error) {
-      console.log(data);
+      console.log("log saved");
     }
   };
 

@@ -1,13 +1,14 @@
 import { Router } from "express";
 import { fightService } from "../services/fightService.js";
-import {} from "../middlewares/user.validation.middleware.js";
 import { responseMiddleware } from "../middlewares/response.middleware.js";
+import { createFightValid } from "../middlewares/fight.validation.middleware.js";
 
 const router = Router();
 
 // OPTIONAL TODO: Implement route controller for fights
 router.post(
   "/",
+  createFightValid,
   (req, res, next) => {
     try {
       const data = fightService.addFight(req, res);
